@@ -1,0 +1,23 @@
+# Build results
+bin/
+obj/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+
+# Environment-specific settings with secrets
+appsettings.Development.json
+
+# macOS
+.DS_Store
+
+# Visual Studio
+.vs/
+

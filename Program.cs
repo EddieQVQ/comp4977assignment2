@@ -59,6 +59,19 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    
+    // Ensure directory exists for SQLite database
+    var connectionString = builder.Configuration.GetConnectionString("Default");
+    if (connectionString != null && connectionString.Contains("Data Source="))
+    {
+        var dbPath = connectionString.Split("Data Source=")[1].Split(';')[0];
+        var directory = Path.GetDirectoryName(dbPath);
+        if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+        {
+            Directory.CreateDirectory(directory);
+        }
+    }
+    
     db.Database.Migrate(); // Apply migrations automatically
 }
 
